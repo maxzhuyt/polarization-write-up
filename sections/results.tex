@@ -1,6 +1,50 @@
 \section{Results}
 \label{sec:results}
 
+% ── Politician simulation: prompts and model scale ────────────────────────────
+\subsection{Politician Simulation: Effect of Prompt Framing and Model Scale}
+\label{sec:results_politician}
+
+Table~\ref{tab:politician_results} reports Pearson $r$ between activation polarization ($m^\text{all}$, mean-centroid) and GSS survey polarization across all 126 public-issue topics, for each model and prompt condition. Two patterns emerge clearly.
+
+\paragraph{Larger models achieve higher alignment.}
+Across all prompt conditions, models with more parameters consistently reach higher correlations. The 70--72B models (Qwen2.5-72B, Llama-3.3-70B, dolphin-34B) all surpass $r = 0.65$, with the top result being dolphin-34B at $r = 0.723$ (stance). In contrast, smaller 3--9B models peak around $r = 0.65$ and are more sensitive to prompt framing.
+
+\paragraph{Stance prompt is most reliable at scale.}
+For models above $\sim$30B parameters, the \textsc{stance} condition (\textit{``What is \{name\}'s position on \{topic\}?''}) yields the highest or near-highest $r$ in most cases. At smaller scales the picture is noisier: for Qwen3-4B, \textsc{stance} and \textsc{survey} dominate depending on model type, while \textsc{rhetorical} underperforms. For Llama-3.1-8B instruct, \textsc{survey} slightly edges out \textsc{stance} (0.645 vs.\ 0.607).
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Pearson $r$ between politician-simulation activation polarization and GSS survey polarization ($T = 126$ public issues), by model and prompt condition. Bold = best condition per model.}
+\label{tab:politician_results}
+\begin{tabular}{llcccc}
+\toprule
+Model & Type & Params & \textsc{rhetorical} & \textsc{stance} & \textsc{survey} \\
+\midrule
+\multicolumn{6}{l}{\textit{Small models}} \\
+SmolLM3-3B (base)      & base      & 3B  & 0.456 & 0.496 & 0.484 \\
+SmolLM3-3B (instruct)  & instruct  & 3B  & 0.395 & 0.354 & 0.555 \\
+SmolLM3-3B (reasoning) & reasoning & 3B  & 0.399 & 0.379 & \textbf{0.613} \\
+Qwen3-4B (base)        & base      & 4B  & 0.271 & \textbf{0.584} & 0.390 \\
+Qwen3-4B (instruct)    & instruct  & 4B  & 0.334 & \textbf{0.579} & 0.295 \\
+Qwen3-4B (reasoning)   & reasoning & 4B  & 0.468 & \textbf{0.605} & 0.565 \\
+Llama-3.1-8B (base)    & base      & 8B  & 0.456 & 0.566 & 0.544 \\
+Llama-3.1-8B (instruct)& instruct  & 8B  & 0.577 & 0.607 & \textbf{0.645} \\
+Gemma-2-9b (base)      & base      & 9B  & \textbf{0.552} & 0.499 & 0.536 \\
+Gemma-2-9b (instruct)  & instruct  & 9B  & \textbf{0.647} & 0.572 & 0.557 \\
+\midrule
+\multicolumn{6}{l}{\textit{Large models}} \\
+Mistral-Small-24B      & instruct  & 24B & 0.587 & 0.611 & \textbf{0.633} \\
+Qwen3-32B              & instruct  & 32B & 0.586 & 0.609 & \textbf{0.640} \\
+DeepSeek-R1-32B        & reasoning & 32B & 0.509 & \textbf{0.538} & 0.528 \\
+dolphin-34B            & instruct  & 34B & 0.686 & \textbf{0.723} & 0.654 \\
+Llama-3.3-70B          & instruct  & 70B & 0.591 & 0.547 & \textbf{0.652} \\
+Qwen2.5-72B            & instruct  & 72B & 0.666 & \textbf{0.708} & 0.698 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 % ── Model comparison ──────────────────────────────────────────────────────────
 \subsection{Model Comparison: Base vs.\ Instruct vs.\ Reasoning}
 \label{sec:results_models}
@@ -15,7 +59,7 @@
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{comparison_scatter}
-    \caption{Scatter of per-topic LLM activation polarization vs.\ GSS survey polarization, for selected models. Each point is one GSS topic ($T = 126$).}
+    \caption{Scatter of per-topic LLM activation polarization vs.\ GSS survey polarization, for selected models. Each point is one public-issue topic ($T_\text{pub} = 126$).}
     \label{fig:comparison_scatter}
 \end{figure}
 

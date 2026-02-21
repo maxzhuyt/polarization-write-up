@@ -41,7 +41,12 @@ Respondents are classified by the GSS \texttt{partyid} variable on a 7-point sca
 \end{center}
 
 \paragraph{Topic scope.}
-We analyze $T = 126$ public-issue topics from the GSS. Eight topics are excluded whose wording contains explicit racial comparison framing that would conflate the topic of interest with the persona-construction signal (\texttt{hubbywk1}, \texttt{racdif1}--\texttt{racdif4}, \texttt{workwhts}, \texttt{wlthwhts}, \texttt{intlwhts}).
+We analyze two categories of GSS topics:
+\begin{itemize}
+    \item \textbf{Public issues} ($T_\text{pub} = 126$): questions about policy, government, and social issues. Eight topics are excluded whose wording contains explicit racial comparison framing that would conflate the topic of interest with the persona-construction signal (\texttt{hubbywk1}, \texttt{racdif1}--\texttt{racdif4}, \texttt{workwhts}, \texttt{wlthwhts}, \texttt{intlwhts}).
+    \item \textbf{Private life} ($T_\text{priv} \approx 70$): questions about personal behavior, religious practice, and lifestyle (e.g., church attendance, sexual attitudes, family structure). Five topics are excluded due to ambiguous framing (\texttt{reborn}, \texttt{marwht}, \texttt{helpful}, \texttt{helpfulnv}, \texttt{helpfulv}).
+\end{itemize}
+Public issues are analyzed in all simulation conditions. Private life topics are included in the demographic simulation; recent large-model politician experiments focus on public issues, where polarization ground-truth data are more complete.
 
 % ── Activation extraction ─────────────────────────────────────────────────────
 \subsection{Activation Extraction}
@@ -134,7 +139,7 @@ Max sequence length: 512 tokens. To prevent leakage, any lifestyle variable that
 \subsection{Alignment Metric}
 \label{sec:alignment}
 
-For a given simulation method, condition, and layer-selection variant, we correlate the vector of LLM activation polarization scores $\hat{\boldsymbol{\delta}}$ with the GSS polarization vector $\boldsymbol{\delta}$ across all $T = 126$ topics:
+For a given simulation method, condition, and layer-selection variant, we correlate the vector of LLM activation polarization scores $\hat{\boldsymbol{\delta}}$ with the GSS polarization vector $\boldsymbol{\delta}$ across all $T$ topics in the category ($T_\text{pub} = 126$ or $T_\text{priv} \approx 70$):
 \begin{align}
     r &= \mathrm{Pearson}(\hat{\boldsymbol{\delta}},\, \boldsymbol{\delta}) \\
     \rho &= \mathrm{Spearman}(\hat{\boldsymbol{\delta}},\, \boldsymbol{\delta})
