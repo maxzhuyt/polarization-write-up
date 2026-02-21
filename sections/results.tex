@@ -53,7 +53,7 @@
         \caption{Distance by topic category.}
         \label{fig:exp1_category}
     \end{subfigure}
-    \caption{\textbf{Exp 1}: Partisan encoding strength (base vs.\ instruct vs.\ reasoning). Exp 1R (Figure~\ref{fig:exp1r}) replicates on disjoint topics.}
+    \caption{\textbf{Exp 1}: Partisan encoding strength (base vs.\ instruct vs.\ reasoning).}
     \label{fig:exp1}
 \end{figure}
 
@@ -90,89 +90,6 @@
     \label{fig:exp2_heatmaps}
 \end{figure}
 
-% ── Exp 3 — Coherence ─────────────────────────────────────────────────────────
-\subsection{Experiment 3: Cross-Topic Representational Coherence}
-\label{sec:exp3}
-
-\begin{figure}[ht]
-    \centering
-    \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[width=\linewidth]{exp3_coherence}
-        \caption{Coherence by model type.}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[width=\linewidth]{exp3_self_vs_transfer}
-        \caption{Self vs.\ cross-topic transfer accuracy.}
-    \end{subfigure}
-    \caption{\textbf{Exp 3}: The partisan direction is stable across topics within a model, especially for instruct/reasoning models.}
-    \label{fig:exp3}
-\end{figure}
-
-% ── Exp 5 — Elite amplification ───────────────────────────────────────────────
-\subsection{Experiment 5: Elite Amplification}
-\label{sec:exp5}
-
-\begin{figure}[ht]
-    \centering
-    \begin{subfigure}[b]{0.52\linewidth}
-        \includegraphics[width=\linewidth]{exp5_scatter}
-        \caption{LLM polarization vs.\ GSS polarization per topic.}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.44\linewidth}
-        \includegraphics[width=\linewidth]{exp5_heatmap}
-        \caption{Amplification ratio heatmap.}
-    \end{subfigure}
-    \caption{\textbf{Exp 5}: LLM activation polarization is systematically \emph{amplified} relative to survey polarization, consistent with elite-opinion dynamics.}
-    \label{fig:exp5}
-\end{figure}
-
-% ── Exp 6 — False polarization ────────────────────────────────────────────────
-\subsection{Experiment 6: False Polarization Detection}
-\label{sec:exp6}
-
-\begin{figure}[ht]
-    \centering
-    \begin{subfigure}[b]{0.52\linewidth}
-        \includegraphics[width=\linewidth]{exp6_quadrant}
-        \caption{Quadrant analysis: high-LLM / low-GSS vs.\ low-LLM / high-GSS.}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.44\linewidth}
-        \includegraphics[width=\linewidth]{exp6_roc}
-        \caption{ROC curves for false-polarization classification.}
-    \end{subfigure}
-    \caption{\textbf{Exp 6}: Identifying topics where LLM activations over- or under-estimate survey-measured polarization.}
-    \label{fig:exp6}
-\end{figure}
-
-% ── Exp 7 — Head discriminability ─────────────────────────────────────────────
-\subsection{Experiment 7: Per-Head Discriminability}
-\label{sec:exp7}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\linewidth]{exp7_head_heatmap}
-    \caption{\textbf{Exp 7}: Per-head LDA discriminability heatmap (layer $\times$ head) for a representative topic (\texttt{abhelp2}). A small subset of heads carries the partisan signal.}
-    \label{fig:exp7_heatmap}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[width=\linewidth]{exp7_auc_by_layer}
-        \caption{Mean AUC by layer depth.}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[width=\linewidth]{exp7_top_heads}
-        \caption{Layer distribution of the top-$k$ discriminative heads.}
-    \end{subfigure}
-    \caption{\textbf{Exp 7}: The most discriminative heads cluster in the middle-to-late layers.}
-    \label{fig:exp7}
-\end{figure}
-
 % ── Exp 8 — Affective polarization ────────────────────────────────────────────
 \subsection{Experiment 8: Affective vs.\ Policy Polarization}
 \label{sec:exp8}
@@ -192,59 +109,3 @@
     \label{fig:exp8}
 \end{figure}
 
-% ── Exp 9 — Anonymization ─────────────────────────────────────────────────────
-\subsection{Experiment 9: Name Anonymization}
-\label{sec:exp9}
-
-\begin{figure}[ht]
-    \centering
-    \begin{subfigure}[b]{0.52\linewidth}
-        \includegraphics[width=\linewidth]{exp9_named_vs_fictional}
-        \caption{Partisan signal: real vs.\ fictional names.}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.44\linewidth}
-        \includegraphics[width=\linewidth]{exp9_probe}
-        \caption{Probe accuracy by condition.}
-    \end{subfigure}
-    \caption{\textbf{Exp 9}: Replacing politician names with fictional names eliminates the partisan signal, confirming that the effect is name-driven, not syntax-driven.}
-    \label{fig:exp9}
-\end{figure}
-
-% ── Exp 12 — NOMINATE probing ─────────────────────────────────────────────────
-\subsection{Experiment 12: DW-NOMINATE Probing}
-\label{sec:exp12}
-
-\begin{figure}[ht]
-    \centering
-    \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[width=\linewidth]{exp12_spearman}
-        \caption{Best Spearman $\rho$ per model head.}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[width=\linewidth]{exp12_transfer}
-        \caption{Cross-topic transfer of the NOMINATE probe.}
-    \end{subfigure}
-    \caption{\textbf{Exp 12}: Per-head ridge regression predicting DW-NOMINATE scores (replicating Kaplan et al.), showing the ideological dimension is localized and transferable.}
-    \label{fig:exp12}
-\end{figure}
-
-% ── Bramson ───────────────────────────────────────────────────────────────────
-\subsection{Bramson Dimensions of Polarization}
-\label{sec:bramson}
-
-\begin{figure}[ht]
-    \centering
-    \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[width=\linewidth]{bramson_gss_correlations}
-        \caption{Correlation with GSS for each Bramson dimension.}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[width=\linewidth]{bramson_all_dimensions}
-        \caption{All 9 Bramson dimensions across models.}
-    \end{subfigure}
-    \caption{\textbf{Bramson}: Decomposing LLM activation polarization into the 9 conceptual dimensions of \citet{bramson2017}, and comparing each to the GSS benchmark.}
-    \label{fig:bramson}
-\end{figure}
