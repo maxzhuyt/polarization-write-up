@@ -1,0 +1,217 @@
+Model,Method,Score,Label
+Llama 3.1 8B Instruct,Supervised Heads,0.4932,L18H12
+Llama 3.1 8B Instruct,Supervised Heads,0.4598,L15H8
+Llama 3.1 8B Instruct,Supervised Heads,0.4294,L14H27
+Llama 3.1 8B Instruct,Supervised Post-o-proj,0.5978,L20
+Llama 3.1 8B Instruct,Supervised Post-o-proj,0.5745,L16
+Llama 3.1 8B Instruct,Supervised Post-o-proj,0.5212,L22
+Llama 3.1 8B Instruct,Supervised Hidden States,0.579,L17
+Llama 3.1 8B Instruct,Supervised Hidden States,0.5682,L14
+Llama 3.1 8B Instruct,Supervised Hidden States,0.5605,L12
+Llama 3.1 8B Instruct,Unsupervised Best Possible Probe Heads,0.8109,"L18H15,PC1"
+Llama 3.1 8B Instruct,Unsupervised Best Possible Probe Heads,0.8073,"L14H27,PC1"
+Llama 3.1 8B Instruct,Unsupervised Best Possible Probe Heads,0.8057,"L18H12,PC1"
+Llama 3.1 8B Instruct,Unsupervised Best Possible Probe Post-o-proj,0.8156,"L15,PC1"
+Llama 3.1 8B Instruct,Unsupervised Best Possible Probe Post-o-proj,0.8125,"L12,PC1"
+Llama 3.1 8B Instruct,Unsupervised Best Possible Probe Post-o-proj,0.812,"L16,PC2"
+Llama 3.1 8B Instruct,Unsupervised Best Possible Probe Hidden States,0.8036,"L24,PC1"
+Llama 3.1 8B Instruct,Unsupervised Best Possible Probe Hidden States,0.8018,"L27,PC1"
+Llama 3.1 8B Instruct,Unsupervised Best Possible Probe Hidden States,0.8015,"L16,PC1"
+Llama 3.1 8B Instruct,Unsupervised Flattened All Layers Heads,0.5475,PC2
+Llama 3.1 8B Instruct,Unsupervised Flattened All Layers Heads,0.5324,PC1
+Llama 3.1 8B Instruct,Unsupervised Flattened All Layers Heads,0.2657,PC3
+Llama 3.1 8B Instruct,Unsupervised Flattened All Layers Post-o-proj,0.5276,PC3
+Llama 3.1 8B Instruct,Unsupervised Flattened All Layers Post-o-proj,0.4495,PC2
+Llama 3.1 8B Instruct,Unsupervised Flattened All Layers Post-o-proj,0.374,PC1
+Llama 3.1 8B Instruct,Unsupervised Flattened All Layers Hidden States,0.7819,PC1
+Llama 3.1 8B Instruct,Unsupervised Flattened All Layers Hidden States,0.1106,PC2
+Llama 3.1 8B Instruct,Unsupervised Flattened All Layers Hidden States,0.0692,PC3
+Llama 3.1 8B Instruct,Unsupervised Flattened Middle 25% Layers Heads,0.8169,PC1
+Llama 3.1 8B Instruct,Unsupervised Flattened Middle 25% Layers Heads,0.0612,PC2
+Llama 3.1 8B Instruct,Unsupervised Flattened Middle 25% Layers Heads,0.0278,PC3
+Llama 3.1 8B Instruct,Unsupervised Flattened Middle 25% Layers Post-o-proj,0.8116,PC1
+Llama 3.1 8B Instruct,Unsupervised Flattened Middle 25% Layers Post-o-proj,0.0737,PC2
+Llama 3.1 8B Instruct,Unsupervised Flattened Middle 25% Layers Post-o-proj,0.0257,PC3
+Llama 3.1 8B Instruct,Unsupervised Flattened Middle 25% Layers Hidden States,0.8043,PC1
+Llama 3.1 8B Instruct,Unsupervised Flattened Middle 25% Layers Hidden States,0.1139,PC3
+Llama 3.1 8B Instruct,Unsupervised Flattened Middle 25% Layers Hidden States,0.0415,PC2
+Llama 3.1 8B Instruct,Unsupervised Best-Variance Layer Heads,0.2083,"L21H22,PC1"
+Llama 3.1 8B Instruct,Unsupervised Best-Variance Layer Heads,0.102,"L21H22,PC3"
+Llama 3.1 8B Instruct,Unsupervised Best-Variance Layer Heads,0.0324,"L21H22,PC2"
+Llama 3.1 8B Instruct,Unsupervised Best-Variance Layer Post-o-proj,0.4207,"L11H,PC1"
+Llama 3.1 8B Instruct,Unsupervised Best-Variance Layer Post-o-proj,0.4032,"L11H,PC3"
+Llama 3.1 8B Instruct,Unsupervised Best-Variance Layer Post-o-proj,0.2737,"L11H,PC2"
+Llama 3.1 8B Instruct,Unsupervised Best-Variance Layer Hidden States,0.1297,"L10H,PC1"
+Llama 3.1 8B Instruct,Unsupervised Best-Variance Layer Hidden States,0.0894,"L10H,PC2"
+Llama 3.1 8B Instruct,Unsupervised Best-Variance Layer Hidden States,0.0051,"L10H,PC3"
+Llama 3.1 8B Instruct,Unsupervised Best-ExpVar Layer Heads,0.0543,"L0H29,PC3"
+Llama 3.1 8B Instruct,Unsupervised Best-ExpVar Layer Heads,0.0462,"L0H29,PC2"
+Llama 3.1 8B Instruct,Unsupervised Best-ExpVar Layer Heads,0.0073,"L0H29,PC1"
+Llama 3.1 8B Instruct,Unsupervised Best-ExpVar Layer Post-o-proj,0.8125,"L12H,PC1"
+Llama 3.1 8B Instruct,Unsupervised Best-ExpVar Layer Post-o-proj,0.0184,"L12H,PC2"
+Llama 3.1 8B Instruct,Unsupervised Best-ExpVar Layer Post-o-proj,0.0008,"L12H,PC3"
+Llama 3.1 8B Instruct,Unsupervised Best-ExpVar Layer Hidden States,0.8015,"L16H,PC1"
+Llama 3.1 8B Instruct,Unsupervised Best-ExpVar Layer Hidden States,0.1286,"L16H,PC3"
+Llama 3.1 8B Instruct,Unsupervised Best-ExpVar Layer Hidden States,0.0388,"L16H,PC2"
+Mistral 7B v0.2 Instruct,Supervised Heads,0.4721,L16H9
+Mistral 7B v0.2 Instruct,Supervised Heads,0.4295,L16H8
+Mistral 7B v0.2 Instruct,Supervised Heads,0.3671,L15H5
+Mistral 7B v0.2 Instruct,Supervised Post-o-proj,0.5117,L16
+Mistral 7B v0.2 Instruct,Supervised Post-o-proj,0.5104,L14
+Mistral 7B v0.2 Instruct,Supervised Post-o-proj,0.504,L17
+Mistral 7B v0.2 Instruct,Supervised Hidden States,0.5271,L17
+Mistral 7B v0.2 Instruct,Supervised Hidden States,0.5189,L19
+Mistral 7B v0.2 Instruct,Supervised Hidden States,0.5184,L18
+Mistral 7B v0.2 Instruct,Unsupervised Best Possible Probe Heads,0.8045,"L16H8,PC1"
+Mistral 7B v0.2 Instruct,Unsupervised Best Possible Probe Heads,0.8018,"L16H9,PC1"
+Mistral 7B v0.2 Instruct,Unsupervised Best Possible Probe Heads,0.7996,"L16H10,PC1"
+Mistral 7B v0.2 Instruct,Unsupervised Best Possible Probe Post-o-proj,0.8097,"L16,PC1"
+Mistral 7B v0.2 Instruct,Unsupervised Best Possible Probe Post-o-proj,0.7901,"L15,PC1"
+Mistral 7B v0.2 Instruct,Unsupervised Best Possible Probe Post-o-proj,0.7334,"L10,PC3"
+Mistral 7B v0.2 Instruct,Unsupervised Best Possible Probe Hidden States,0.8059,"L17,PC1"
+Mistral 7B v0.2 Instruct,Unsupervised Best Possible Probe Hidden States,0.7921,"L16,PC1"
+Mistral 7B v0.2 Instruct,Unsupervised Best Possible Probe Hidden States,0.792,"L18,PC1"
+Mistral 7B v0.2 Instruct,Unsupervised Flattened All Layers Heads,0.6908,PC2
+Mistral 7B v0.2 Instruct,Unsupervised Flattened All Layers Heads,0.2479,PC3
+Mistral 7B v0.2 Instruct,Unsupervised Flattened All Layers Heads,0.1266,PC1
+Mistral 7B v0.2 Instruct,Unsupervised Flattened All Layers Post-o-proj,0.6365,PC2
+Mistral 7B v0.2 Instruct,Unsupervised Flattened All Layers Post-o-proj,0.146,PC3
+Mistral 7B v0.2 Instruct,Unsupervised Flattened All Layers Post-o-proj,0.0942,PC1
+Mistral 7B v0.2 Instruct,Unsupervised Flattened All Layers Hidden States,0.7112,PC2
+Mistral 7B v0.2 Instruct,Unsupervised Flattened All Layers Hidden States,0.0355,PC1
+Mistral 7B v0.2 Instruct,Unsupervised Flattened All Layers Hidden States,0.0214,PC3
+Mistral 7B v0.2 Instruct,Unsupervised Flattened Middle 25% Layers Heads,0.7266,PC1
+Mistral 7B v0.2 Instruct,Unsupervised Flattened Middle 25% Layers Heads,0.2749,PC2
+Mistral 7B v0.2 Instruct,Unsupervised Flattened Middle 25% Layers Heads,0.0601,PC3
+Mistral 7B v0.2 Instruct,Unsupervised Flattened Middle 25% Layers Post-o-proj,0.7298,PC1
+Mistral 7B v0.2 Instruct,Unsupervised Flattened Middle 25% Layers Post-o-proj,0.3073,PC2
+Mistral 7B v0.2 Instruct,Unsupervised Flattened Middle 25% Layers Post-o-proj,0.0535,PC3
+Mistral 7B v0.2 Instruct,Unsupervised Flattened Middle 25% Layers Hidden States,0.7916,PC1
+Mistral 7B v0.2 Instruct,Unsupervised Flattened Middle 25% Layers Hidden States,0.144,PC3
+Mistral 7B v0.2 Instruct,Unsupervised Flattened Middle 25% Layers Hidden States,0.0492,PC2
+Mistral 7B v0.2 Instruct,Unsupervised Best-Variance Layer Heads,0.4706,"L17H23,PC2"
+Mistral 7B v0.2 Instruct,Unsupervised Best-Variance Layer Heads,0.4346,"L17H23,PC3"
+Mistral 7B v0.2 Instruct,Unsupervised Best-Variance Layer Heads,0.3961,"L17H23,PC1"
+Mistral 7B v0.2 Instruct,Unsupervised Best-Variance Layer Post-o-proj,0.1135,"L29H,PC1"
+Mistral 7B v0.2 Instruct,Unsupervised Best-Variance Layer Post-o-proj,0.0902,"L29H,PC3"
+Mistral 7B v0.2 Instruct,Unsupervised Best-Variance Layer Post-o-proj,0.0779,"L29H,PC2"
+Mistral 7B v0.2 Instruct,Unsupervised Best-Variance Layer Hidden States,0.7379,"L21H,PC2"
+Mistral 7B v0.2 Instruct,Unsupervised Best-Variance Layer Hidden States,0.2178,"L21H,PC1"
+Mistral 7B v0.2 Instruct,Unsupervised Best-Variance Layer Hidden States,0.0984,"L21H,PC3"
+Mistral 7B v0.2 Instruct,Unsupervised Best-ExpVar Layer Heads,0.0403,"L7H16,PC1"
+Mistral 7B v0.2 Instruct,Unsupervised Best-ExpVar Layer Heads,0.0105,"L7H16,PC2"
+Mistral 7B v0.2 Instruct,Unsupervised Best-ExpVar Layer Heads,0.0042,"L7H16,PC3"
+Mistral 7B v0.2 Instruct,Unsupervised Best-ExpVar Layer Post-o-proj,0.7901,"L15H,PC1"
+Mistral 7B v0.2 Instruct,Unsupervised Best-ExpVar Layer Post-o-proj,0.0429,"L15H,PC2"
+Mistral 7B v0.2 Instruct,Unsupervised Best-ExpVar Layer Post-o-proj,0.0272,"L15H,PC3"
+Mistral 7B v0.2 Instruct,Unsupervised Best-ExpVar Layer Hidden States,0.8059,"L17H,PC1"
+Mistral 7B v0.2 Instruct,Unsupervised Best-ExpVar Layer Hidden States,0.0338,"L17H,PC3"
+Mistral 7B v0.2 Instruct,Unsupervised Best-ExpVar Layer Hidden States,0.0098,"L17H,PC2"
+Mistral 8B Instruct,Supervised Heads,0.4882,L25H13
+Mistral 8B Instruct,Supervised Heads,0.4801,L20H18
+Mistral 8B Instruct,Supervised Heads,0.4793,L20H16
+Mistral 8B Instruct,Supervised Post-o-proj,0.5416,L11
+Mistral 8B Instruct,Supervised Post-o-proj,0.5237,L16
+Mistral 8B Instruct,Supervised Post-o-proj,0.5139,L18
+Mistral 8B Instruct,Supervised Hidden States,0.5678,L33
+Mistral 8B Instruct,Supervised Hidden States,0.5519,L32
+Mistral 8B Instruct,Supervised Hidden States,0.5479,L34
+Mistral 8B Instruct,Unsupervised Best Possible Probe Heads,0.8099,"L16H21,PC1"
+Mistral 8B Instruct,Unsupervised Best Possible Probe Heads,0.8025,"L18H31,PC1"
+Mistral 8B Instruct,Unsupervised Best Possible Probe Heads,0.8009,"L11H25,PC1"
+Mistral 8B Instruct,Unsupervised Best Possible Probe Post-o-proj,0.7996,"L11,PC1"
+Mistral 8B Instruct,Unsupervised Best Possible Probe Post-o-proj,0.7975,"L22,PC1"
+Mistral 8B Instruct,Unsupervised Best Possible Probe Post-o-proj,0.7809,"L13,PC1"
+Mistral 8B Instruct,Unsupervised Best Possible Probe Hidden States,0.8016,"L16,PC1"
+Mistral 8B Instruct,Unsupervised Best Possible Probe Hidden States,0.7918,"L15,PC1"
+Mistral 8B Instruct,Unsupervised Best Possible Probe Hidden States,0.7835,"L18,PC1"
+Mistral 8B Instruct,Unsupervised Flattened All Layers Heads,0.6545,PC1
+Mistral 8B Instruct,Unsupervised Flattened All Layers Heads,0.4168,PC2
+Mistral 8B Instruct,Unsupervised Flattened All Layers Heads,0.1163,PC3
+Mistral 8B Instruct,Unsupervised Flattened All Layers Post-o-proj,0.204,PC1
+Mistral 8B Instruct,Unsupervised Flattened All Layers Post-o-proj,0.0441,PC3
+Mistral 8B Instruct,Unsupervised Flattened All Layers Post-o-proj,0.0028,PC2
+Mistral 8B Instruct,Unsupervised Flattened All Layers Hidden States,0.6488,PC3
+Mistral 8B Instruct,Unsupervised Flattened All Layers Hidden States,0.3757,PC1
+Mistral 8B Instruct,Unsupervised Flattened All Layers Hidden States,0.0319,PC2
+Mistral 8B Instruct,Unsupervised Flattened Middle 25% Layers Heads,0.8018,PC1
+Mistral 8B Instruct,Unsupervised Flattened Middle 25% Layers Heads,0.0177,PC3
+Mistral 8B Instruct,Unsupervised Flattened Middle 25% Layers Heads,0.0041,PC2
+Mistral 8B Instruct,Unsupervised Flattened Middle 25% Layers Post-o-proj,0.7967,PC1
+Mistral 8B Instruct,Unsupervised Flattened Middle 25% Layers Post-o-proj,0.0311,PC2
+Mistral 8B Instruct,Unsupervised Flattened Middle 25% Layers Post-o-proj,0.012,PC3
+Mistral 8B Instruct,Unsupervised Flattened Middle 25% Layers Hidden States,0.7832,PC1
+Mistral 8B Instruct,Unsupervised Flattened Middle 25% Layers Hidden States,0.1472,PC3
+Mistral 8B Instruct,Unsupervised Flattened Middle 25% Layers Hidden States,0.0496,PC2
+Mistral 8B Instruct,Unsupervised Best-Variance Layer Heads,0.0848,"L2H23,PC2"
+Mistral 8B Instruct,Unsupervised Best-Variance Layer Heads,0.0758,"L2H23,PC1"
+Mistral 8B Instruct,Unsupervised Best-Variance Layer Heads,0.0306,"L2H23,PC3"
+Mistral 8B Instruct,Unsupervised Best-Variance Layer Post-o-proj,0.7996,"L11H,PC1"
+Mistral 8B Instruct,Unsupervised Best-Variance Layer Post-o-proj,0.0464,"L11H,PC3"
+Mistral 8B Instruct,Unsupervised Best-Variance Layer Post-o-proj,0.0174,"L11H,PC2"
+Mistral 8B Instruct,Unsupervised Best-Variance Layer Hidden States,0.6607,"L36H,PC3"
+Mistral 8B Instruct,Unsupervised Best-Variance Layer Hidden States,0.3412,"L36H,PC1"
+Mistral 8B Instruct,Unsupervised Best-Variance Layer Hidden States,0.0311,"L36H,PC2"
+Mistral 8B Instruct,Unsupervised Best-ExpVar Layer Heads,0.6724,"L20H9,PC3"
+Mistral 8B Instruct,Unsupervised Best-ExpVar Layer Heads,0.0953,"L20H9,PC2"
+Mistral 8B Instruct,Unsupervised Best-ExpVar Layer Heads,0.0943,"L20H9,PC1"
+Mistral 8B Instruct,Unsupervised Best-ExpVar Layer Post-o-proj,0.7682,"L14H,PC1"
+Mistral 8B Instruct,Unsupervised Best-ExpVar Layer Post-o-proj,0.1763,"L14H,PC2"
+Mistral 8B Instruct,Unsupervised Best-ExpVar Layer Post-o-proj,0.0574,"L14H,PC3"
+Mistral 8B Instruct,Unsupervised Best-ExpVar Layer Hidden States,0.7918,"L15H,PC1"
+Mistral 8B Instruct,Unsupervised Best-ExpVar Layer Hidden States,0.0753,"L15H,PC2"
+Mistral 8B Instruct,Unsupervised Best-ExpVar Layer Hidden States,0.01,"L15H,PC3"
+Gemma 2 9B IT,Supervised Heads,0.5021,L25H0
+Gemma 2 9B IT,Supervised Heads,0.4873,L26H3
+Gemma 2 9B IT,Supervised Heads,0.4778,L21H5
+Gemma 2 9B IT,Supervised Post-o-proj,0.5625,L21
+Gemma 2 9B IT,Supervised Post-o-proj,0.5599,L22
+Gemma 2 9B IT,Supervised Post-o-proj,0.5596,L34
+Gemma 2 9B IT,Supervised Hidden States,0.6535,L39
+Gemma 2 9B IT,Supervised Hidden States,0.6455,L40
+Gemma 2 9B IT,Supervised Hidden States,0.6428,L37
+Gemma 2 9B IT,Unsupervised Best Possible Probe Heads,0.8292,"L33H12,PC1"
+Gemma 2 9B IT,Unsupervised Best Possible Probe Heads,0.8135,"L25H6,PC1"
+Gemma 2 9B IT,Unsupervised Best Possible Probe Heads,0.8128,"L20H6,PC1"
+Gemma 2 9B IT,Unsupervised Best Possible Probe Post-o-proj,0.8025,"L19,PC1"
+Gemma 2 9B IT,Unsupervised Best Possible Probe Post-o-proj,0.7816,"L25,PC1"
+Gemma 2 9B IT,Unsupervised Best Possible Probe Post-o-proj,0.7709,"L40,PC1"
+Gemma 2 9B IT,Unsupervised Best Possible Probe Hidden States,0.8133,"L40,PC1"
+Gemma 2 9B IT,Unsupervised Best Possible Probe Hidden States,0.8081,"L39,PC1"
+Gemma 2 9B IT,Unsupervised Best Possible Probe Hidden States,0.8079,"L42,PC1"
+Gemma 2 9B IT,Unsupervised Flattened All Layers Heads,0.8124,PC1
+Gemma 2 9B IT,Unsupervised Flattened All Layers Heads,0.1026,PC2
+Gemma 2 9B IT,Unsupervised Flattened All Layers Heads,0.0822,PC3
+Gemma 2 9B IT,Unsupervised Flattened All Layers Post-o-proj,0.8129,PC1
+Gemma 2 9B IT,Unsupervised Flattened All Layers Post-o-proj,0.0235,PC3
+Gemma 2 9B IT,Unsupervised Flattened All Layers Post-o-proj,0.0062,PC2
+Gemma 2 9B IT,Unsupervised Flattened All Layers Hidden States,0.8004,PC1
+Gemma 2 9B IT,Unsupervised Flattened All Layers Hidden States,0.154,PC2
+Gemma 2 9B IT,Unsupervised Flattened All Layers Hidden States,0.0068,PC3
+Gemma 2 9B IT,Unsupervised Flattened Middle 25% Layers Heads,0.8183,PC1
+Gemma 2 9B IT,Unsupervised Flattened Middle 25% Layers Heads,0.0661,PC3
+Gemma 2 9B IT,Unsupervised Flattened Middle 25% Layers Heads,0.0337,PC2
+Gemma 2 9B IT,Unsupervised Flattened Middle 25% Layers Post-o-proj,0.8037,PC1
+Gemma 2 9B IT,Unsupervised Flattened Middle 25% Layers Post-o-proj,0.0905,PC2
+Gemma 2 9B IT,Unsupervised Flattened Middle 25% Layers Post-o-proj,0.0095,PC3
+Gemma 2 9B IT,Unsupervised Flattened Middle 25% Layers Hidden States,0.7862,PC1
+Gemma 2 9B IT,Unsupervised Flattened Middle 25% Layers Hidden States,0.1911,PC2
+Gemma 2 9B IT,Unsupervised Flattened Middle 25% Layers Hidden States,0.0376,PC3
+Gemma 2 9B IT,Unsupervised Best-Variance Layer Heads,0.6115,"L11H15,PC3"
+Gemma 2 9B IT,Unsupervised Best-Variance Layer Heads,0.2061,"L11H15,PC1"
+Gemma 2 9B IT,Unsupervised Best-Variance Layer Heads,0.1757,"L11H15,PC2"
+Gemma 2 9B IT,Unsupervised Best-Variance Layer Post-o-proj,0.5737,"L26H,PC2"
+Gemma 2 9B IT,Unsupervised Best-Variance Layer Post-o-proj,0.4874,"L26H,PC1"
+Gemma 2 9B IT,Unsupervised Best-Variance Layer Post-o-proj,0.3011,"L26H,PC3"
+Gemma 2 9B IT,Unsupervised Best-Variance Layer Hidden States,0.5162,"L18H,PC1"
+Gemma 2 9B IT,Unsupervised Best-Variance Layer Hidden States,0.5152,"L18H,PC2"
+Gemma 2 9B IT,Unsupervised Best-Variance Layer Hidden States,0.1912,"L18H,PC3"
+Gemma 2 9B IT,Unsupervised Best-ExpVar Layer Heads,0.0779,"L0H12,PC3"
+Gemma 2 9B IT,Unsupervised Best-ExpVar Layer Heads,0.0739,"L0H12,PC2"
+Gemma 2 9B IT,Unsupervised Best-ExpVar Layer Heads,0.0306,"L0H12,PC1"
+Gemma 2 9B IT,Unsupervised Best-ExpVar Layer Post-o-proj,0.7625,"L23H,PC1"
+Gemma 2 9B IT,Unsupervised Best-ExpVar Layer Post-o-proj,0.0618,"L23H,PC3"
+Gemma 2 9B IT,Unsupervised Best-ExpVar Layer Post-o-proj,0.0575,"L23H,PC2"
+Gemma 2 9B IT,Unsupervised Best-ExpVar Layer Hidden States,0.735,"L19H,PC1"
+Gemma 2 9B IT,Unsupervised Best-ExpVar Layer Hidden States,0.3307,"L19H,PC2"
+Gemma 2 9B IT,Unsupervised Best-ExpVar Layer Hidden States,0.022,"L19H,PC3"

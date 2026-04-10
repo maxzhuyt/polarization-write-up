@@ -1,0 +1,76 @@
+\appendix
+
+% ── A: System Message Sweep ───────────────────────────────────────────────────
+\section{System Message Variants}
+\label{app:sys_msg}
+
+To verify that the choice of system message does not drive the main findings, we tested nine system message phrasings on a held-out model (dolphin-2.9.3-llama-3-8b, 8B) using the \textsc{stance} user-turn template across all 199 topics. Table~\ref{tab:sysmsg_sweep} reports Pearson $r$ between activation-space partisan divergence and GSS partisanship for the full topic set ($r_\text{all}$), public issues only ($r_\text{pub}$), and private-life topics only ($r_\text{priv}$).
+
+\begin{table}[ht]
+\centering
+\small
+\caption{System message sweep on dolphin-2.9.3-llama-3-8b (\textsc{stance} user-turn, all 199 topics). Sorted by $r_\text{all}$.}
+\label{tab:sysmsg_sweep}
+\begin{tabular}{lccc}
+\toprule
+System message & $r_\text{all}$ & $r_\text{pub}$ & $r_\text{priv}$ \\
+\midrule
+``You are simulating the public stance of U.S.\ politicians.'' & 0.739 & -- & -- \\
+``You are simulating the stance of U.S.\ politicians.''       & 0.733 & -- & -- \\
+``You are simulating U.S.\ politicians.''                     & 0.731 & -- & -- \\
+``You are simulating how U.S.\ politicians would respond to policy questions.'' & 0.723 & -- & -- \\
+``Respond as if you are the named U.S.\ politician.''         & 0.737 & 0.654 & 0.706 \\
+``You are role-playing as U.S.\ members of Congress.''        & 0.727 & -- & -- \\
+``You are an analyst of U.S.\ politicians.''                  & 0.715 & -- & -- \\
+``Answer questions about U.S.\ politicians.''                 & 0.722 & -- & -- \\
+\textit{(empty)}                                              & 0.726 & -- & -- \\
+\bottomrule
+\end{tabular}
+\smallskip\\
+\footnotesize Spread across all nine conditions: $\Delta r_\text{all} = 0.024$. Separate $r_\text{pub}$ / $r_\text{priv}$ reported only where available from the benchmark run; the pattern is consistent with $r_\text{all}$.
+\end{table}
+
+% ── B: Dolphin Family Model Comparison ───────────────────────────────────────
+\section{Dolphin Family: Full Model Comparison}
+\label{app:models}
+
+Table~\ref{tab:dolphin_comparison} reports results for six models---all Dolphin uncensored fine-tunes plus Qwen3-32B as a safety-aligned reference---evaluated under two system message conditions (\textsc{roleplay} and \textsc{sim\_politicians}) with the \textsc{stance} user-turn template. $r_\text{all}$ is computed across all 199 topics; $r_\text{pub}$ and $r_\text{priv}$ are computed on the 126 public-issue and 73 private-life subsets respectively.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Dolphin family model comparison: Pearson $r$ by system message condition (\textsc{stance} user-turn). Sorted by model size.}
+\label{tab:dolphin_comparison}
+\begin{tabular}{llccccc}
+\toprule
+Model & Sys.\ msg & Params & $r_\text{all}$ & $r_\text{pub}$ & $r_\text{priv}$ & s/topic \\
+\midrule
+\multirow{2}{*}{dolphin-2.9.3-llama-3-8b}
+  & roleplay        & 8B  & 0.737 & 0.654 & 0.706 & 3.34 \\
+  & sim\_politicians & 8B  & 0.731 & 0.651 & 0.671 & 3.33 \\
+\midrule
+\multirow{2}{*}{Dolphin3.0-Mistral-24B}
+  & roleplay        & 24B & 0.786 & 0.741 & 0.667 & 6.94 \\
+  & sim\_politicians & 24B & 0.757 & 0.708 & 0.590 & 7.05 \\
+\midrule
+\multirow{2}{*}{Qwen3-32B (reference)}
+  & roleplay        & 32B & 0.653 & 0.576 & 0.566 & 13.44 \\
+  & sim\_politicians & 32B & 0.671 & 0.596 & 0.584 & 13.69 \\
+\midrule
+\multirow{2}{*}{dolphin-2.9.1-yi-1.5-34b}
+  & roleplay        & 34B & 0.774 & 0.721 & 0.720 & 12.85 \\
+  & sim\_politicians & 34B & 0.725 & 0.654 & 0.669 & 13.03 \\
+\midrule
+\multirow{2}{*}{dolphin-2.9.1-llama-3-70b}
+  & roleplay        & 70B & 0.711 & 0.625 & 0.617 & 26.79 \\
+  & sim\_politicians & 70B & 0.666 & 0.553 & 0.610 & 26.81 \\
+\midrule
+\multirow{2}{*}{dolphin-2.9.2-qwen2-72b}
+  & roleplay        & 72B & 0.661 & 0.575 & 0.635 & 28.21 \\
+  & sim\_politicians & 72B & 0.640 & 0.565 & 0.569 & 28.17 \\
+\bottomrule
+\end{tabular}
+\smallskip\\
+\footnotesize \textsc{roleplay}: ``Respond as if you are the named U.S.\ politician.''\quad
+\textsc{sim\_politicians}: ``You are simulating U.S.\ politicians.''
+\end{table}
