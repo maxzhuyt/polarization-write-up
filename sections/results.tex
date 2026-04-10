@@ -1,250 +1,159 @@
 \section{Results}
 \label{sec:results}
 
-% ── Model comparison ──────────────────────────────────────────────────────────
-\subsection{Model Comparison: Base vs.\ Instruct vs.\ Reasoning}
-\label{sec:results_models}
+% ── Politician simulation: prompts and model scale ────────────────────────────
+\subsection{Scale and Uncensored Fine-Tuning Amplify Partisan Alignment in Politician Simulation}
+\label{sec:results_politician}
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\linewidth]{comparison_bar}
-    \caption{Pearson $r$ between LLM activation polarization and GSS survey polarization, grouped by model type (base / instruct / reasoning) across model families. Higher is better.}
-    \label{fig:comparison_bar}
-\end{figure}
+Table~\ref{tab:politician_results} reports Pearson $r$ between activation polarization ($m^\text{all}$, mean-centroid) and GSS survey polarization across all 126 public-issue topics, for each model and prompt condition. Three patterns emerge.
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\linewidth]{comparison_scatter}
-    \caption{Scatter of per-topic LLM activation polarization vs.\ GSS survey polarization, for selected models. Each point is one GSS topic ($T = 126$).}
-    \label{fig:comparison_scatter}
-\end{figure}
+\paragraph{Larger models achieve higher alignment.}
+Across all prompt conditions, models with more parameters consistently reach higher correlations. The 70--72B models (Qwen2.5-72B, Llama-3.3-70B) both surpass $r = 0.65$, while standard 24--32B instruct models (Mistral-Small-24B, Qwen3-32B) peak around $r = 0.63$. In contrast, smaller 3--9B models are more sensitive to prompt framing and rarely exceed $r = 0.65$ even under the best condition.
 
-\begin{figure}[ht]
-    \centering
-    \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[width=\linewidth]{comparison_by_family}
-        \caption{Correlation by model family.}
-        \label{fig:comparison_by_family}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[width=\linewidth]{comparison_bar_individual_models}
-        \caption{Individual model breakdown.}
-        \label{fig:comparison_individual}
-    \end{subfigure}
-    \caption{Alignment with GSS across model families and individual models.}
-    \label{fig:comparison_combined}
-\end{figure}
+\paragraph{Stance prompt is most reliable at scale.}
+For models above $\sim$30B parameters, the \textsc{stance} condition (\textit{``What is \{name\}'s position on \{topic\}?''}) yields the highest or near-highest $r$ in most cases. At smaller scales the picture is noisier: for Qwen3-4B, \textsc{stance} and \textsc{survey} dominate depending on model type, while \textsc{rhetorical} underperforms. For Llama-3.1-8B instruct, \textsc{survey} slightly edges out \textsc{stance} (0.645 vs.\ 0.607).
 
-% ── Exp 1 — Encoding strength ─────────────────────────────────────────────────
-\subsection{Experiment 1: Encoding Strength}
-\label{sec:exp1}
+\paragraph{Uncensored fine-tuning amplifies the partisan signal.}
+The strongest result in Table~\ref{tab:politician_results} comes from dolphin-34B ($r = 0.723$, stance), a fine-tune of the Yi-1.5-34B base model that removes RLHF safety alignment~\cite{cognitivecomputations2024dolphin}. Crucially, this surpasses both Llama-3.3-70B ($r = 0.652$) and Qwen2.5-72B ($r = 0.708$), models with more than twice the parameter count. The gap between dolphin-34B and comparably-sized standard instruct models (Qwen3-32B: $r = 0.640$; Mistral-Small-24B: $r = 0.633$) is larger than the gap attributable to doubling model size, suggesting that RLHF alignment suppresses the partisan structure encoded in activations rather than erasing the underlying political knowledge. Safety-trained instruct models may represent political content with attenuated or less discriminative geometry in per-head activation space; removing that suppression allows the partisan signal acquired during pretraining to manifest more cleanly. The same pattern holds for private-life topics (Table~\ref{tab:politician_results_private}), where dolphin-34B reaches $r = 0.709$ (stance), the highest among all models on that category except Qwen2.5-72B under the survey condition ($r = 0.719$).
 
-\begin{figure}[ht]
-    \centering
-    \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[width=\linewidth]{exp1_mahalanobis}
-        \caption{Overall Mahalanobis distance by model type.}
-        \label{fig:exp1_mahal}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[width=\linewidth]{exp1_by_category}
-        \caption{Distance by topic category.}
-        \label{fig:exp1_category}
-    \end{subfigure}
-    \caption{\textbf{Exp 1}: Partisan encoding strength (base vs.\ instruct vs.\ reasoning). Exp 1R (Figure~\ref{fig:exp1r}) replicates on disjoint topics.}
-    \label{fig:exp1}
-\end{figure}
+\begin{table}[ht]
+\centering
+\small
+\caption{Pearson $r$ between politician-simulation activation polarization and GSS survey polarization ($T = 126$ public issues), by model and prompt condition. Bold = best condition per model.}
+\label{tab:politician_results}
+\begin{tabular}{llcccc}
+\toprule
+Model & Type & Params & \textsc{rhetorical} & \textsc{stance} & \textsc{survey} \\
+\midrule
+\multicolumn{6}{l}{\textit{Small models}} \\
+SmolLM3-3B (base)      & base      & 3B  & 0.456 & 0.496 & 0.484 \\
+SmolLM3-3B (instruct)  & instruct  & 3B  & 0.395 & 0.354 & 0.555 \\
+SmolLM3-3B (reasoning) & reasoning & 3B  & 0.399 & 0.379 & \textbf{0.613} \\
+Qwen3-4B (base)        & base      & 4B  & 0.271 & \textbf{0.584} & 0.390 \\
+Qwen3-4B (instruct)    & instruct  & 4B  & 0.334 & \textbf{0.579} & 0.295 \\
+Qwen3-4B (reasoning)   & reasoning & 4B  & 0.468 & \textbf{0.605} & 0.565 \\
+Llama-3.1-8B (base)    & base      & 8B  & 0.456 & \textbf{0.566} & 0.544 \\
+Llama-3.1-8B (instruct)& instruct  & 8B  & 0.577 & 0.607 & \textbf{0.645} \\
+llama-3-8b-dolphin     & instruct  & 8B  & -- & \textbf{0.662} & -- \\
+Gemma-2-9b (base)      & base      & 9B  & \textbf{0.552} & 0.499 & 0.536 \\
+Gemma-2-9b (instruct)  & instruct  & 9B  & \textbf{0.647} & 0.572 & 0.557 \\
+\midrule
+\multicolumn{6}{l}{\textit{Large models}} \\
+Mistral-Small-24B      & instruct  & 24B & 0.587 & 0.611 & \textbf{0.633} \\
+Dolphin-24B-Venice     & instruct  & 24B & 0.634 & \textbf{0.635} & 0.618 \\
+Qwen3-32B              & instruct  & 32B & 0.586 & 0.609 & \textbf{0.640} \\
+DeepSeek-R1-32B        & reasoning & 32B & 0.509 & \textbf{0.538} & 0.528 \\
+Yi-34B-dolphin          & instruct  & 34B & 0.686 & \textbf{0.723} & 0.654 \\
+Llama-3.3-70B          & instruct  & 70B & 0.591 & 0.547 & \textbf{0.652} \\
+Qwen2.5-72B            & instruct  & 72B & 0.666 & \textbf{0.708} & 0.698 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.55\linewidth]{exp1r_mahalanobis}
-    \caption{\textbf{Exp 1R (Replication)}: Mahalanobis distance on a held-out disjoint topic set.}
-    \label{fig:exp1r}
-\end{figure}
+Table~\ref{tab:politician_results_private} reports the same quantities for private-life topics ($T_\text{priv} = 73$, after excluding five noisy topics and restricting to the curated topic list). Overall, alignment on private-life topics is lower than on public issues for most models (mean $r = 0.34$ for base, $0.54$ for instruct across small models), consistent with private behaviour being less politically salient. As on public issues, instruct models reliably outperform their base counterparts, and the \textsc{stance} condition tends to be strongest for instruct models.
 
-% ── Exp 2 — Layer depth ───────────────────────────────────────────────────────
-\subsection{Experiment 2: Layer Depth of Partisan Signal}
-\label{sec:exp2}
+At large scale, the same patterns from public issues persist. Yi-34B-dolphin again achieves the highest stance correlation ($r = 0.709$), surpassing Llama-3.3-70B ($r = 0.656$) and Qwen3-32B ($r = 0.598$), confirming that uncensored fine-tuning amplifies partisan signal on private topics as well. Notably, Qwen2.5-72B reaches $r = 0.719$ under the \textsc{survey} condition---the single highest private-topic correlation under any condition or model---while its stance score ($r = 0.517$) is comparatively modest. DeepSeek-R1-32B shows a steep drop from stance ($r = 0.678$) to survey ($r = 0.230$), consistent with the reasoning model's sensitivity to prompt framing observed on public issues. Among small models, Llama-3.1-8B instruct achieves the highest private-topic score ($r = 0.693$, stance), notably exceeding its own public-issue best ($r = 0.645$); Gemma-2-9b instruct follows at $r = 0.647$ (rhetorical).
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\linewidth]{exp2_layer_profiles}
-    \caption{\textbf{Exp 2}: Mean Mahalanobis distance by layer depth, across model families and types. The signal typically peaks in the middle-to-late layers.}
-    \label{fig:exp2_profiles}
-\end{figure}
+\begin{table}[ht]
+\centering
+\small
+\caption{Pearson $r$ between politician-simulation activation polarization and GSS survey polarization ($T = 73$ private-life topics, excluding five noisy items), by model and prompt condition. ``--'' indicates single-condition pilot run. Bold = best condition per model.}
+\label{tab:politician_results_private}
+\begin{tabular}{llcccc}
+\toprule
+Model & Type & Params & \textsc{rhetorical} & \textsc{stance} & \textsc{survey} \\
+\midrule
+\multicolumn{6}{l}{\textit{Small models}} \\
+SmolLM3-3B (base)      & base      & 3B  & 0.318 & 0.370 & \textbf{0.414} \\
+SmolLM3-3B (instruct)  & instruct  & 3B  & 0.508 & \textbf{0.535} & 0.451 \\
+SmolLM3-3B (reasoning) & reasoning & 3B  & \textbf{0.580} & \textbf{0.580} & 0.528 \\
+Qwen3-4B (base)        & base      & 4B  & 0.346 & 0.229 & \textbf{0.356} \\
+Qwen3-4B (instruct)    & instruct  & 4B  & \textbf{0.503} & 0.488 & 0.420 \\
+Qwen3-4B (reasoning)   & reasoning & 4B  & 0.339 & \textbf{0.415} & 0.344 \\
+Llama-3.1-8B (base)    & base      & 8B  & \textbf{0.480} & 0.225 & 0.295 \\
+Llama-3.1-8B (instruct)& instruct  & 8B  & 0.613 & \textbf{0.693} & 0.465 \\
+llama-3-8b-dolphin     & instruct  & 8B  & -- & \textbf{0.628} & -- \\
+Gemma-2-9b (base)      & base      & 9B  & 0.376 & 0.305 & \textbf{0.401} \\
+Gemma-2-9b (instruct)  & instruct  & 9B  & \textbf{0.647} & 0.627 & 0.522 \\
+\midrule
+\multicolumn{6}{l}{\textit{Large models}} \\
+Mistral-Small-24B      & instruct  & 24B & 0.588 & \textbf{0.630} & 0.396 \\
+Dolphin-24B-Venice     & instruct  & 24B & \textbf{0.653} & 0.613 & 0.507 \\
+Qwen3-32B              & instruct  & 32B & 0.527 & \textbf{0.598} & 0.410 \\
+DeepSeek-R1-32B        & reasoning & 32B & 0.641 & \textbf{0.678} & 0.230 \\
+Yi-34B-dolphin         & instruct  & 34B & 0.624 & \textbf{0.709} & 0.597 \\
+Llama-3.3-70B          & instruct  & 70B & 0.632 & \textbf{0.656} & 0.638 \\
+Qwen2.5-72B            & instruct  & 72B & 0.577 & 0.517 & \textbf{0.719} \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\begin{figure}[ht]
-    \centering
-    \begin{subfigure}[b]{0.62\linewidth}
-        \includegraphics[width=\linewidth]{exp2_heatmaps}
-        \caption{Head-level heatmaps (layer $\times$ head).}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.35\linewidth}
-        \includegraphics[width=\linewidth]{exp2_peak_width}
-        \caption{Peak layer and signal width.}
-    \end{subfigure}
-    \caption{\textbf{Exp 2}: Spatial distribution of partisan signal across the network.}
-    \label{fig:exp2_heatmaps}
-\end{figure}
+Figure~\ref{fig:partisan_scatter} visualises the joint distribution of activation polarization and discourse intensity across topics, for dolphin-34B (stance condition). Each dot is a topic; the $x$-axis is the mean PCA-Mahalanobis distance between Democrat and Republican politician activations (partisan divergence), and the $y$-axis is the mean total dispersion (activation spread across the full politician set, regardless of party). Dotted lines mark the median of each axis, dividing topics into four quadrants. Topics in the upper-right quadrant are simultaneously high in partisan divergence and high in overall discourse intensity---issues where politicians speak distinctly \emph{and} variably. On public issues (Figure~\ref{fig:partisan_public}), abortion questions and several environmental-attitude items cluster in the upper-right. On private-life topics (Figure~\ref{fig:partisan_private}), religious-belief and practice items cluster in the upper half, reflecting high discourse intensity.
 
-% ── Exp 3 — Coherence ─────────────────────────────────────────────────────────
-\subsection{Experiment 3: Cross-Topic Representational Coherence}
-\label{sec:exp3}
 
-\begin{figure}[ht]
-    \centering
-    \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[width=\linewidth]{exp3_coherence}
-        \caption{Coherence by model type.}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[width=\linewidth]{exp3_self_vs_transfer}
-        \caption{Self vs.\ cross-topic transfer accuracy.}
-    \end{subfigure}
-    \caption{\textbf{Exp 3}: The partisan direction is stable across topics within a model, especially for instruct/reasoning models.}
-    \label{fig:exp3}
-\end{figure}
+% ── Demographic simulation ────────────────────────────────────────────────────
+\subsection{Demographic Simulation}
+\label{sec:results_demographic}
 
-% ── Exp 5 — Elite amplification ───────────────────────────────────────────────
-\subsection{Experiment 5: Elite Amplification}
-\label{sec:exp5}
+We next evaluate whether partisan structure can be recovered directly from simulated individual respondents rather than politician prompts. Using the non-stratified, 5-dimension demographic simulation framework (Section~\ref{sec:demo}), we generate responses for each of the 2,731 subjects in GSS 2021 across all survey topics. For every subject--topic pair, we prompt the model with the subject’s demographic profile, extract activation representations for the generated response, and compute activation polarization between Democrats (\texttt{partyid = 0}) and Republicans (\texttt{partyid = 6}).
 
-\begin{figure}[ht]
-    \centering
-    \begin{subfigure}[b]{0.52\linewidth}
-        \includegraphics[width=\linewidth]{exp5_scatter}
-        \caption{LLM polarization vs.\ GSS polarization per topic.}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.44\linewidth}
-        \includegraphics[width=\linewidth]{exp5_heatmap}
-        \caption{Amplification ratio heatmap.}
-    \end{subfigure}
-    \caption{\textbf{Exp 5}: LLM activation polarization is systematically \emph{amplified} relative to survey polarization, consistent with elite-opinion dynamics.}
-    \label{fig:exp5}
-\end{figure}
+For each topic, polarization is calculated as the distance between party centroids in activation space (mean-centroid metric), as described in (Section~\ref{sec:mahal}). We then correlate model-derived polarization with the corresponding polarization measured directly from GSS survey responses.
 
-% ── Exp 6 — False polarization ────────────────────────────────────────────────
-\subsection{Experiment 6: False Polarization Detection}
-\label{sec:exp6}
+\paragraph{Alignment with survey polarization.}
+Table~\ref{tab:demographic_results} reports correlations separately for public-issue and private-life topics. Overall, demographic simulation produces positive but weaker alignment than politician simulation. Mistral-7B-v0.2 shows the strongest agreement with survey polarization in both categories ($r \approx 0.31$), while Gemma-2-9B yields modest correlations and Llama-3.1-8B exhibits weak or near-zero alignment, especially on private-life topics.
 
-\begin{figure}[ht]
-    \centering
-    \begin{subfigure}[b]{0.52\linewidth}
-        \includegraphics[width=\linewidth]{exp6_quadrant}
-        \caption{Quadrant analysis: high-LLM / low-GSS vs.\ low-LLM / high-GSS.}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.44\linewidth}
-        \includegraphics[width=\linewidth]{exp6_roc}
-        \caption{ROC curves for false-polarization classification.}
-    \end{subfigure}
-    \caption{\textbf{Exp 6}: Identifying topics where LLM activations over- or under-estimate survey-measured polarization.}
-    \label{fig:exp6}
-\end{figure}
+\begin{table}[ht]
+\centering
+\small
+\caption{Correlation between demographic-simulation activation polarization and GSS survey polarization, by model and topic category.}
+\label{tab:demographic_results}
+\begin{tabular}{llccccc}
+\toprule
+Model & Category & Uncensored & $n_{\text{topics}}$ & Pearson $r$ & Spearman $\rho$ \\
+\midrule
+Mistral-7B-v0.2        & private\_life  & No  & 73  & 0.322 & 0.312 \\
+Gemma-2-9b             & private\_life  & No  & 73  & 0.109 & 0.145 \\
+Llama-3.1-8B           & private\_life  & No  & 73  & -0.109 & -0.006 \\
+Llama-3.1-70B          & private\_life  & No  & 73  & \textbf{0.521} & \textbf{0.558} \\
+Dolphin-2.9.3-mistral-7B-32k & private\_life & Yes & 73  & \textbf{0.344} & \textbf{0.358} \\
+Dolphin3.0-Llama3.1-8B & private\_life  & Yes & 73  & 0.218 & 0.272 \\
+\midrule
+Mistral-7B-v0.2        & public\_issues & No  & 126 & 0.307 & 0.334 \\
+Gemma-2-9b             & public\_issues & No  & 126 & 0.230 & 0.224 \\
+Llama-3.1-8B           & public\_issues & No  & 126 & 0.132 & 0.163 \\
+Llama-3.1-70B    & public\_issues & No & 126  & -0.026 & 0.008 \\
+Dolphin-2.9.3-mistral-7B-32k & public\_issues & Yes & 126 & \textbf{0.390} & \textbf{0.356} \\
+Dolphin3.0-Llama3.1-8B & public\_issues & Yes & 126 & 0.253 & 0.264 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-% ── Exp 7 — Head discriminability ─────────────────────────────────────────────
-\subsection{Experiment 7: Per-Head Discriminability}
-\label{sec:exp7}
+\paragraph{Comparison to politician simulation.}
+Compared with the politician-based setup (Section~\ref{sec:results_politician}), demographic simulation yields systematically lower correlations. This suggests that while demographic conditioning induces meaningful partisan structure in activation space, explicit political framing (e.g., named politicians or stance prompts) amplifies alignment with real-world survey polarization. Nonetheless, the presence of positive correlations indicates that models encode non-trivial links between demographic attributes and political attitudes.
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\linewidth]{exp7_head_heatmap}
-    \caption{\textbf{Exp 7}: Per-head LDA discriminability heatmap (layer $\times$ head) for a representative topic (\texttt{abhelp2}). A small subset of heads carries the partisan signal.}
-    \label{fig:exp7_heatmap}
-\end{figure}
+% ── 83-trait demographic simulation (dolphin models) ──────────────────────────
+\paragraph{Expanded 83-trait profiles (uncensored models).}
+We additionally evaluated dolphin fine-tuned models using an expanded 83-trait demographic profile that includes detailed lifestyle, belief, and behavioural attributes alongside the core sociodemographic variables. Table~\ref{tab:demographic_dolphin} reports Pearson $r$ (mean-centroid metric) for three models across all prompt conditions and both topic categories.
 
-\begin{figure}[ht]
-    \centering
-    \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[width=\linewidth]{exp7_auc_by_layer}
-        \caption{Mean AUC by layer depth.}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[width=\linewidth]{exp7_top_heads}
-        \caption{Layer distribution of the top-$k$ discriminative heads.}
-    \end{subfigure}
-    \caption{\textbf{Exp 7}: The most discriminative heads cluster in the middle-to-late layers.}
-    \label{fig:exp7}
-\end{figure}
+The 83-trait correlations improve substantially over the 5-trait baseline. dphn-mistral7b achieves $r = 0.505$ on public issues (stance), the strongest demographic-simulation result observed, and maintains strong alignment on private topics ($r = 0.446$--$0.455$ across all three conditions). dphn-llama8b reaches $r = 0.441$ on private topics (stance) and $0.425$ on public issues (stance), compared to $r \leq 0.132$ for Llama-3.1-8B in the 5-trait setup. In contrast, dphn-qwen3b (3B) produces near-zero correlations across all conditions ($r \leq 0.12$), indicating that the 83-trait profile alone is insufficient without adequate model capacity.
 
-% ── Exp 8 — Affective polarization ────────────────────────────────────────────
-\subsection{Experiment 8: Affective vs.\ Policy Polarization}
-\label{sec:exp8}
-
-\begin{figure}[ht]
-    \centering
-    \begin{subfigure}[b]{0.52\linewidth}
-        \includegraphics[width=\linewidth]{exp8_cross_domain}
-        \caption{Cross-domain transfer: probe trained on policy predicts affective, and vice versa.}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.44\linewidth}
-        \includegraphics[width=\linewidth]{exp8_by_domain}
-        \caption{Mahalanobis distance by domain.}
-    \end{subfigure}
-    \caption{\textbf{Exp 8}: LLMs encode a \emph{shared} partisan direction for both policy and affective content.}
-    \label{fig:exp8}
-\end{figure}
-
-% ── Exp 9 — Anonymization ─────────────────────────────────────────────────────
-\subsection{Experiment 9: Name Anonymization}
-\label{sec:exp9}
-
-\begin{figure}[ht]
-    \centering
-    \begin{subfigure}[b]{0.52\linewidth}
-        \includegraphics[width=\linewidth]{exp9_named_vs_fictional}
-        \caption{Partisan signal: real vs.\ fictional names.}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.44\linewidth}
-        \includegraphics[width=\linewidth]{exp9_probe}
-        \caption{Probe accuracy by condition.}
-    \end{subfigure}
-    \caption{\textbf{Exp 9}: Replacing politician names with fictional names eliminates the partisan signal, confirming that the effect is name-driven, not syntax-driven.}
-    \label{fig:exp9}
-\end{figure}
-
-% ── Exp 12 — NOMINATE probing ─────────────────────────────────────────────────
-\subsection{Experiment 12: DW-NOMINATE Probing}
-\label{sec:exp12}
-
-\begin{figure}[ht]
-    \centering
-    \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[width=\linewidth]{exp12_spearman}
-        \caption{Best Spearman $\rho$ per model head.}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[width=\linewidth]{exp12_transfer}
-        \caption{Cross-topic transfer of the NOMINATE probe.}
-    \end{subfigure}
-    \caption{\textbf{Exp 12}: Per-head ridge regression predicting DW-NOMINATE scores (replicating Kaplan et al.), showing the ideological dimension is localized and transferable.}
-    \label{fig:exp12}
-\end{figure}
-
-% ── Bramson ───────────────────────────────────────────────────────────────────
-\subsection{Bramson Dimensions of Polarization}
-\label{sec:bramson}
-
-\begin{figure}[ht]
-    \centering
-    \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[width=\linewidth]{bramson_gss_correlations}
-        \caption{Correlation with GSS for each Bramson dimension.}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[width=\linewidth]{bramson_all_dimensions}
-        \caption{All 9 Bramson dimensions across models.}
-    \end{subfigure}
-    \caption{\textbf{Bramson}: Decomposing LLM activation polarization into the 9 conceptual dimensions of \citet{bramson2017}, and comparing each to the GSS benchmark.}
-    \label{fig:bramson}
-\end{figure}
+\begin{table}[ht]
+\centering
+\small
+\caption{Demographic simulation with 83-trait profiles (uncensored dolphin models): Pearson $r$ (mean-centroid) between activation polarization and GSS survey polarization, by model, topic category, and prompt condition. Bold = best condition per model--category block.}
+\label{tab:demographic_dolphin}
+\begin{tabular}{llccc}
+\toprule
+Model & Category & \textsc{rhetorical} & \textsc{stance} & \textsc{survey} \\
+\midrule
+dphn-llama8b   & private & 0.326 & \textbf{0.441} & 0.383 \\
+               & public  & 0.359 & \textbf{0.425} & 0.174 \\
+\midrule
+dphn-mistral7b & private & 0.446 & \textbf{0.455} & 0.454 \\
+               & public  & 0.403 & \textbf{0.505} & 0.265 \\
+\midrule
+dphn-qwen3b    & private & 0.047 & 0.032 & 0.000 \\
+               & public  & 0.069 & 0.119 & $-$0.101 \\
+\bottomrule
+\end{tabular}
+\end{table}

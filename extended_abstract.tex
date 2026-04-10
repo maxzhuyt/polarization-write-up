@@ -1,0 +1,80 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{xcolor}
+
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
+
+\title{Issue-Level Partisan Distance in LLM Activations\\Tracks Survey Polarization}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+% ==============================================================================
+\section*{Research Question}
+% ==============================================================================
+
+Large language models trained on internet-scale corpora ingest substantial political discourse---news media, legislative records, opinion journalism, social media. We ask: \textbf{does the partisan divergence in LLM attention activations correlate with survey-measured partisan gaps across political topics?} Specifically, we compare unsupervised activation-space distances between Democrat and Republican clusters with issue-by-issue partisan gaps from the General Social Survey (GSS, 2021--2024), testing whether LLMs encode \emph{ideological} polarization---the distance between group means on issue positions---in their internal representations.
+
+% ==============================================================================
+\section*{Method}
+% ==============================================================================
+
+For 199 GSS topics (126 public-issue, 73 private-life), we generate prompts by simulating all 550 members of the 116th U.S.\ Congress under three prompt framings (rhetorical, stance, survey). We extract per-head attention activations from the output-projection layer at the last token position, PCA-reduce each head to 15 dimensions, and compute the Mahalanobis distance between Democrat and Republican centroids. These per-head distances are averaged across all $L \times H$ heads to produce a single activation-polarization score per topic. We then correlate this score vector with GSS survey polarization (the normalized party-mean difference) across topics.
+
+We test 17 transformer models (3B--72B) spanning five families, including base, instruct, reasoning, and uncensored variants. In a complementary arm, we replace politician names with demographic persona prompts constructed from real GSS respondent profiles (up to 83 attributes).
+
+% ==============================================================================
+\section*{Results}
+% ==============================================================================
+
+Table~\ref{tab:summary} summarizes the key results from the politician simulation (best prompt condition per model). Three patterns emerge.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Selected models: Pearson $r$ between LLM activation polarization and GSS survey polarization (best prompt condition). Full results in the main paper.}
+\label{tab:summary}
+\begin{tabular}{llccc}
+\toprule
+Model & Type & Params & Public $r$ & Private $r$ \\
+\midrule
+SmolLM3-3B     & reasoning & 3B  & 0.61 & 0.58 \\
+Gemma-2-9b     & instruct  & 9B  & 0.65 & 0.65 \\
+Llama-3.1-8B   & instruct  & 8B  & 0.65 & 0.69 \\
+Qwen2.5-72B    & instruct  & 72B & 0.71 & -- \\
+Yi-34B-dolphin & uncensored& 34B & \textbf{0.72} & \textbf{0.67} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Scale.} Larger models achieve higher alignment: 70B+ instruct models consistently reach $r > 0.65$, while 3--9B models peak around $r = 0.65$ and are more sensitive to prompt framing.
+
+\paragraph{Uncensored fine-tuning.} The strongest result comes from Yi-34B-dolphin ($r = 0.72$), an uncensored fine-tune with RLHF safety training removed. This surpasses Qwen2.5-72B ($r = 0.71$) and Llama-3.3-70B ($r = 0.65$) despite having fewer than half their parameters. The gap between the dolphin model and comparably-sized standard instruct models ($r \approx 0.63$) exceeds the gain from doubling model size, suggesting that RLHF attenuates the partisan geometry encoded during pretraining rather than erasing the underlying political knowledge.
+
+\paragraph{Private-life topics.} Alignment extends to private-life topics (religious practice, sexual attitudes, moral views). Llama-3.1-8B instruct achieves $r = 0.69$ on private topics---exceeding its own public-issue best---suggesting the model has internalized the broader cultural sorting of American society, not just policy positions.
+
+\paragraph{Demographic simulation.} Replacing politician names with demographic persona prompts yields weaker alignment ($r \leq 0.51$, even with 83-attribute profiles from real GSS respondents), indicating that models encode partisan structure more reliably through named-entity associations than through demographic inference.
+
+% ==============================================================================
+\section*{Discussion}
+% ==============================================================================
+
+The finding that a 34B uncensored model outperforms safety-aligned models at twice the scale is scientifically informative but ethically complex. We do not recommend uncensored models for deployment; we report this because it reveals that RLHF safety training measurably affects the discriminative geometry of partisan representations. Higher alignment does not imply a ``better'' model---it indicates that the activation structure more closely mirrors survey data.
+
+More broadly, these results document that LLMs trained on political discourse develop internal representations whose partisan structure tracks real-world opinion data. This complements supervised approaches to partisan representation learning \citep{kim2025linear} by showing that unsupervised activation geometry---computed without any training signal---correlates with external survey measures.
+
+% ==============================================================================
+\section*{Limitations}
+% ==============================================================================
+
+The study is US-centric; generalization to multiparty systems is untested. Correlations are ecological (topic-level, $N = 126$ or 73), not individual-level. We measure ideological polarization only (group-mean distance), not affective polarization or distributional bimodality. Point estimates lack uncertainty quantification; bootstrap confidence intervals are planned.
+
+\end{document}

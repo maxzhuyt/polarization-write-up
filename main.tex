@@ -11,6 +11,7 @@
 \usepackage{parskip}
 \usepackage{xcolor}
 \usepackage{enumitem}
+\usepackage{tabularx}
 \usepackage{natbib}
 \usepackage{setspace}
 
@@ -18,7 +19,7 @@
 \graphicspath{{figures/}}
 
 % ── Metadata ──────────────────────────────────────────────────────────────────
-\title{Partisan Topology in Large Language Models:\\
+\title{Zeitgeist Machine:\\
        Activation Geometry Tracks Survey Polarization}
 \author{}
 \date{\today}
@@ -43,5 +44,24 @@
 % ── References ────────────────────────────────────────────────────────────────
 \bibliographystyle{apa}
 \bibliography{references}
+
+
+% ── Figures ───────────────────────────────────────────────────────────────────
+\clearpage
+\section*{Figures}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{partisan_public_scatter.png}
+\caption{Partisan activation geometry for \textbf{public issues} under dolphin-34B (stance). Each point is one of the top-50 topics (ranked by joint Mahal--GSS alignment). $x$-axis: mean PCA-Mahalanobis D--R distance; $y$-axis: mean total activation dispersion. Dotted lines mark axis medians.}
+\label{fig:partisan_public}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{partisan_private_scatter.png}
+\caption{Partisan activation geometry for \textbf{private-life issues} under dolphin-34B (stance). Top-44 topics by joint Mahal--GSS alignment. Axes and quadrant lines as in Figure~\ref{fig:partisan_public}.}
+\label{fig:partisan_private}
+\end{figure}
 
 \end{document}
